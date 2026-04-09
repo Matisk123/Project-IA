@@ -84,3 +84,42 @@ php artisan migrate:fresh --seed
     - **Cas d'erreur / Historique** : 1 événement passé terminé.
     - **État vide** : 1 événement sans aucun participant.
     - **Données aléatoires** : 5 événements supplémentaires pour peupler l'interface.
+
+## Installation avec Docker
+
+Ce projet inclut une configuration Docker permettant de lancer l'application facilement, sans avoir à installer PHP ou SQLite directement de manière locale.
+
+### Prérequis
+- [Docker](https://docs.docker.com/get-docker/) installé.
+- [Docker Compose](https://docs.docker.com/compose/install/) installé (inclus avec Docker Desktop).
+
+### Étapes d'installation
+
+1. **Cloner le dépôt** (si ce n'est pas déjà fait) :
+   ```bash
+   git clone <URL_DU_DEPOT>
+   cd Project-IA
+   ```
+
+2. **Démarrer l'application avec Docker Compose** :
+   Pour construire l'image et lancer le conteneur en arrière-plan, exécutez à la racine du projet :
+   ```bash
+   docker-compose up -d --build
+   ```
+
+3. **Initialiser la base de données (Migrations & Seeders)** :
+   Une fois le conteneur démarré (`projet-ia-app`), vous devez lancer les migrations et injecter les données de test à l'intérieur du conteneur :
+   ```bash
+   docker exec -it projet-ia-app php artisan migrate:fresh --seed
+   ```
+
+4. **Accéder à l'application** :
+   L'application est désormais fonctionnelle et exposée sur le port `8080`. Ouvrez votre navigateur et accédez à :
+   [http://localhost:8080](http://localhost:8080)
+
+### Arrêter l'application
+
+Pour stopper les conteneurs (la base de données SQLite est persistée via un volume Docker, vos données ne seront pas perdues) :
+```bash
+docker-compose down
+```
