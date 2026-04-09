@@ -1,0 +1,68 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "dev", "master" ]
+  pull_request:
+    branches: [ "main", "dev", "master" ]
+
+jobs:
+  lint_and_test:
+    name: Code Quality & PHPUnit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Déclaration du projet (Checkout)
+      uses: actions/checkout@v4
+
+    - name: Installation de PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, libxml, bcmath
+        coverage: none
+
+    - name: Mise en cache des dépendances Composer
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+    - name: Installation des dépendances Composer
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Installation des dépendances NPM & Build
+      run: |
+        npm ci
+        npm run build
+
+    - name: Préparation de l'environnement Laravel
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+
+    - name: Création d'une base de données de test
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+        php artisan migrate --force
+
+    - name: Vérification des standards de code avec Pint
+      run: ./vendor/bin/pint --test
+
+    - name: Exécution de la suite de tests (Unit/Feature)
+      run: php artisan test
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+
+    - name: Test de compilation du Conteneur Docker (Dry Run)
+      run: docker build -t app-ia-test .
