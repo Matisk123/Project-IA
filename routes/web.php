@@ -18,9 +18,10 @@ Route::middleware('auth')->group(function () {
 
     // Events routes
     Route::resource('events', \App\Http\Controllers\EventController::class);
-    
-    // Registration route
+
+    // Registration route with Rate Limiting (Measure 3 of US33)
     Route::post('/events/{event}/toggle-registration', [\App\Http\Controllers\RegistrationController::class, 'toggle'])
+        ->middleware('throttle:5,1')
         ->name('events.register.toggle');
 });
 

@@ -8,20 +8,27 @@ use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
+    /**
+     * Gère l'inscription ou la désinscription d'un utilisateur à un événement.
+     * Logique de bascule (toggle) basée sur l'existence de la relation en base.
+     */
     public function toggle(Request $request, Event $event)
     {
         $user = Auth::user();
-        
-        // Edge Case 2: Un manager ne s'inscrit pas
+
+        // Regle metier : Les managers ne peuvent pas figurer dans la liste des participants
+        // car cela fausserait les statistiques de présence étudiant et l'export des contacts.
         if ($user->role === 'manager') {
             return redirect()->back()->with('error', 'Action réservée aux élèves. Les managers ne peuvent pas participer.');
         }
 
-        // Edge Case 1: Pas d'inscription pour les événements passés
+        // Regle metier : Une fois l'événement passé, les inscriptions sont verrouillées
+        // pour figer le registre de présence historique.
         if ($event->date->isPast()) {
             return redirect()->back()->with('error', 'Impossible de modifier votre inscription pour un événement dont la date est dépassée.');
         }
-        
+
+        // Logique de bascule : si l'utilisateur est déjà inscrit, on le retire, sinon on l'ajoute.
         if ($event->users()->where('user_id', $user->id)->exists()) {
             $event->users()->detach($user->id);
             $message = 'Vous êtes désinscrit de cet événement.';

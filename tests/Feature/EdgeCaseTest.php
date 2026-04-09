@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use App\Models\Event;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Carbon\Carbon;
 
 class EdgeCaseTest extends TestCase
 {
@@ -17,7 +17,7 @@ class EdgeCaseTest extends TestCase
         $manager = User::factory()->create(['role' => 'manager']);
         $event = Event::factory()->create([
             'date' => Carbon::now()->addDays(5),
-            'type' => 'jpo'
+            'type' => 'jpo',
         ]);
 
         $response = $this->actingAs($manager)->post(route('events.register.toggle', $event));
@@ -31,7 +31,7 @@ class EdgeCaseTest extends TestCase
         $student = User::factory()->create(['role' => 'student']);
         $event = Event::factory()->create([
             'date' => Carbon::now()->subDays(5), // Evénement passé
-            'type' => 'jpo'
+            'type' => 'jpo',
         ]);
 
         $response = $this->actingAs($student)->post(route('events.register.toggle', $event));
@@ -46,7 +46,7 @@ class EdgeCaseTest extends TestCase
         $student = User::factory()->create(['role' => 'student']);
         $event = Event::factory()->create([
             'date' => Carbon::now()->addDays(5),
-            'type' => 'jpo'
+            'type' => 'jpo',
         ]);
 
         $event->users()->attach($student->id);
@@ -66,7 +66,7 @@ class EdgeCaseTest extends TestCase
             'type' => 'jpo',
             'date' => Carbon::now()->subDays(5)->format('Y-m-d\TH:i'), // Date dans le passé
             'location' => 'Paris',
-            'description' => 'Description'
+            'description' => 'Description',
         ]);
 
         $response->assertSessionHasErrors(['date']);

@@ -64,3 +64,23 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Initialisation des données (US27)
+
+Pour charger le jeu de données de démonstration et de test, utilisez les commandes suivantes :
+
+```bash
+# Pour une installation propre avec données de test
+php artisan migrate:fresh --seed
+```
+
+### Contenu du jeu de données :
+- **Utilisateurs** :
+    - Manager : `kohnmatis01@gmail.com` (Matis Kohn)
+    - Étudiant Test : `student@example.com`
+    - Mot de passe par défaut : `password`
+- **Événements** :
+    - **Usage Nominal** : 3 événements à venir (Salons et JPO) avec des inscrits.
+    - **Cas d'erreur / Historique** : 1 événement passé terminé.
+    - **État vide** : 1 événement sans aucun participant.
+    - **Données aléatoires** : 5 événements supplémentaires pour peupler l'interface.
