@@ -13,73 +13,19 @@
     
     <style>
         body { font-family: 'Inter', sans-serif; }
-        
-        .bg-pattern {
-            background-image: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .animated-text {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .blob {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(180deg, rgba(99, 102, 241, 0.4) 0%, rgba(168, 85, 247, 0.4) 100%);
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: 0;
-            animation: moveBlob 15s infinite alternate ease-in-out;
-        }
-
-        .blob-2 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(180deg, rgba(236, 72, 153, 0.3) 0%, rgba(244, 63, 94, 0.3) 100%);
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: 0;
-            right: 10%;
-            bottom: 10%;
-            animation: moveBlob2 18s infinite alternate ease-in-out;
-        }
-
-        @keyframes moveBlob {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(100px, 50px) scale(1.1); }
-            100% { transform: translate(-50px, 150px) scale(0.9); }
-        }
-
-        @keyframes moveBlob2 {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-100px, -100px) scale(1.2); }
-            100% { transform: translate(50px, -50px) scale(0.8); }
-        }
     </style>
 </head>
-<body class="antialiased bg-slate-950 text-white min-h-screen relative overflow-hidden flex flex-col selection:bg-indigo-500 selection:text-white">
+<body class="antialiased bg-slate-950 text-white min-h-screen relative overflow-x-hidden flex flex-col selection:bg-indigo-500 selection:text-white">
 
     <!-- Ambient Background -->
-    <div class="blob top-[-10%] left-[-5%]"></div>
-    <div class="blob-2"></div>
-    <div class="absolute inset-0 bg-slate-950/50 z-0"></div>
-    <div class="absolute inset-0 bg-pattern z-0 opacity-50"></div>
+    <div class="blob top-[-10%] left-[-5%] pointer-events-none"></div>
+    <div class="blob-2 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-slate-950/50 z-0 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-pattern z-0 opacity-50 pointer-events-none"></div>
 
     <div class="relative z-10 flex flex-col min-h-screen">
         <!-- Navigation -->
-        <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto w-full">
+        <nav class="relative z-50 flex justify-between items-center px-8 py-6 max-w-7xl mx-auto w-full">
             <div class="flex items-center gap-2 group cursor-pointer">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:shadow-indigo-500/50 transition-all duration-300 transform group-hover:scale-105">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,7 +50,7 @@
         </nav>
 
         <!-- Hero Section -->
-        <main class="flex-grow flex flex-col items-center justify-center -mt-16 px-6 relative z-10 text-center">
+        <main class="flex-grow flex flex-col items-center justify-center pt-8 pb-16 px-6 relative z-10 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-sm font-medium mb-8 backdrop-blur-sm animate-fade-in-up">
                 <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
                 Participez au rayonnement de l'école

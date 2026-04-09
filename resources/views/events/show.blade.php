@@ -2,18 +2,18 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-                <a href="{{ route('events.index') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center gap-1 mb-2">
+                <a href="{{ route('events.index') }}" class="text-sm font-medium text-indigo-400 hover:text-indigo-300 flex items-center gap-1 mb-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     Retour aux événements
                 </a>
-                <h2 class="font-extrabold text-3xl text-gray-900 leading-tight">
+                <h2 class="font-extrabold text-3xl text-white leading-tight">
                     {{ $event->title }}
                 </h2>
             </div>
             
             <div class="flex gap-2">
                 @if(Auth::user()->role === 'manager')
-                    <a href="{{ route('events.edit', $event) }}" class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl shadow-sm hover:bg-gray-50 flex items-center gap-2 font-medium transition-colors">
+                    <a href="{{ route('events.edit', $event) }}" class="px-4 py-2 glass-card text-white hover:bg-white/10 rounded-xl shadow-sm flex items-center gap-2 font-medium transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                         Modifier
                     </a>
@@ -21,7 +21,7 @@
                     <form action="{{ route('events.destroy', $event) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="px-4 py-2 bg-white border border-red-200 text-red-600 rounded-xl shadow-sm hover:bg-red-50 flex items-center gap-2 font-medium transition-colors">
+                        <button type="submit" class="px-4 py-2 glass-card border-red-500/50 text-red-400 hover:bg-red-500/10 rounded-xl shadow-sm flex items-center gap-2 font-medium transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                         </button>
                     </form>
@@ -67,35 +67,35 @@
             <!-- Main Content -->
             <div class="flex-grow space-y-6">
                 <!-- Description -->
-                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">À propos</h3>
-                    <p class="text-gray-600 whitespace-pre-line">{{ $event->description }}</p>
+                <div class="glass-card rounded-3xl p-8">
+                    <h3 class="text-xl font-bold text-white mb-4">À propos</h3>
+                    <p class="text-slate-300 whitespace-pre-line">{{ $event->description }}</p>
                 </div>
 
                 <!-- Organization Details -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="glass-card rounded-3xl p-6 hover:-translate-y-1 transition-transform duration-300">
+                        <div class="w-12 h-12 bg-indigo-500/20 text-indigo-400 rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                         </div>
-                        <h4 class="font-bold text-gray-900 mb-2">Sujets présentés</h4>
-                        <p class="text-sm text-gray-600 whitespace-pre-line">{{ $event->subjects ?: 'À définir' }}</p>
+                        <h4 class="font-bold text-white mb-2">Sujets présentés</h4>
+                        <p class="text-sm text-slate-400 whitespace-pre-line">{{ $event->subjects ?: 'À définir' }}</p>
                     </div>
 
-                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="glass-card rounded-3xl p-6 hover:-translate-y-1 transition-transform duration-300">
+                        <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
                         </div>
-                        <h4 class="font-bold text-gray-900 mb-2">Éléments à ramener</h4>
-                        <p class="text-sm text-gray-600 whitespace-pre-line">{{ $event->requirements ?: 'À définir' }}</p>
+                        <h4 class="font-bold text-white mb-2">Éléments à ramener</h4>
+                        <p class="text-sm text-slate-400 whitespace-pre-line">{{ $event->requirements ?: 'À définir' }}</p>
                     </div>
 
-                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="glass-card rounded-3xl p-6 hover:-translate-y-1 transition-transform duration-300">
+                        <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                         </div>
-                        <h4 class="font-bold text-gray-900 mb-2">Guides (Démos IA)</h4>
-                        <p class="text-sm text-gray-600 whitespace-pre-line">{{ $event->guides ?: 'À définir' }}</p>
+                        <h4 class="font-bold text-white mb-2">Guides (Démos IA)</h4>
+                        <p class="text-sm text-slate-400 whitespace-pre-line">{{ $event->guides ?: 'À définir' }}</p>
                     </div>
                 </div>
             </div>
@@ -134,28 +134,28 @@
                 </div>
 
                 <!-- Students Registered -->
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-                    <h4 class="font-bold text-gray-900 mb-4 flex items-center justify-between">
+                <div class="glass-card rounded-3xl p-6">
+                    <h4 class="font-bold text-white mb-4 flex items-center justify-between">
                         Élèves inscrits
-                        <span class="bg-indigo-100 text-indigo-700 text-xs font-extrabold px-2 py-1 rounded-full">{{ $event->users->count() }}</span>
+                        <span class="bg-indigo-500/20 text-indigo-400 text-xs font-extrabold px-2 py-1 rounded-full">{{ $event->users->count() }}</span>
                     </h4>
                     
                     @if($event->users->isEmpty())
                         <div class="text-center py-6">
-                            <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            <div class="w-12 h-12 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                             </div>
-                            <p class="text-sm font-medium text-gray-900">Aucun étudiant inscrit</p>
-                            <p class="text-xs text-gray-500 mt-1">Les inscriptions apparaîtront ici.</p>
+                            <p class="text-sm font-medium text-white">Aucun étudiant inscrit</p>
+                            <p class="text-xs text-slate-400 mt-1">Les inscriptions apparaîtront ici.</p>
                         </div>
                     @else
                         <ul class="space-y-3">
                             @foreach($event->users as $registeredUser)
                                 <li class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 border border-indigo-200 text-indigo-700 flex items-center justify-center font-bold text-xs uppercase">
+                                    <div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-600 text-indigo-400 flex items-center justify-center font-bold text-xs uppercase">
                                         {{ substr($registeredUser->name, 0, 2) }}
                                     </div>
-                                    <span class="text-sm font-medium text-gray-800">{{ $registeredUser->name }}</span>
+                                    <span class="text-sm font-medium text-slate-300">{{ $registeredUser->name }}</span>
                                 </li>
                             @endforeach
                         </ul>
