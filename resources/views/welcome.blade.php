@@ -13,60 +13,6 @@
     
     <style>
         body { font-family: 'Inter', sans-serif; }
-        
-        .bg-pattern {
-            background-image: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .animated-text {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .blob {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(180deg, rgba(99, 102, 241, 0.4) 0%, rgba(168, 85, 247, 0.4) 100%);
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: 0;
-            animation: moveBlob 15s infinite alternate ease-in-out;
-        }
-
-        .blob-2 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(180deg, rgba(236, 72, 153, 0.3) 0%, rgba(244, 63, 94, 0.3) 100%);
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: 0;
-            right: 10%;
-            bottom: 10%;
-            animation: moveBlob2 18s infinite alternate ease-in-out;
-        }
-
-        @keyframes moveBlob {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(100px, 50px) scale(1.1); }
-            100% { transform: translate(-50px, 150px) scale(0.9); }
-        }
-
-        @keyframes moveBlob2 {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-100px, -100px) scale(1.2); }
-            100% { transform: translate(50px, -50px) scale(0.8); }
-        }
     </style>
 </head>
 <body class="antialiased bg-slate-950 text-white min-h-screen relative overflow-x-hidden flex flex-col selection:bg-indigo-500 selection:text-white">
