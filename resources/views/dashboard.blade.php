@@ -47,6 +47,34 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Liste des événements ou état vide -->
+            <div class="mt-12">
+                <h3 class="text-xl font-bold text-gray-900 mb-6">Vos Prochains Événements</h3>
+                @if(Auth::user()->events->isEmpty())
+                    <div class="bg-gray-50/50 rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 class="text-lg font-medium text-gray-900 mb-1">Aucun événement prévu</h4>
+                        <p class="text-gray-500">Vous n'êtes inscrit à aucun salon ou journée portes ouvertes pour le moment.</p>
+                        @if(Auth::user()->role !== 'manager')
+                            <a href="{{ route('events.index') }}" class="mt-4 inline-block px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">Explorer les opportunités</a>
+                        @endif
+                    </div>
+                @else
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        @foreach(Auth::user()->events->sortBy('date') as $event)
+                            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-all">
+                                <div class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2">{{ $event->type === 'jpo' ? 'Portes Ouvertes' : 'Salon' }}</div>
+                                <h4 class="font-bold text-gray-900 mb-1 truncate">{{ $event->title }}</h4>
+                                <div class="text-sm text-gray-500">{{ $event->date->format('d/m/Y') }} • {{ $event->location }}</div>
+                                <a href="{{ route('events.show', $event) }}" class="mt-4 text-sm text-indigo-600 font-medium hover:underline inline-flex items-center gap-1">Voir les détails <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 </x-app-layout>

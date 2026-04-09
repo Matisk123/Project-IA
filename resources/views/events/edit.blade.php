@@ -27,34 +27,49 @@
                             <!-- Titre -->
                             <div class="md:col-span-2">
                                 <label for="title" class="block text-sm font-bold text-gray-700 mb-1">Titre de l'événement *</label>
-                                <input type="text" name="title" id="title" value="{{ old('title', $event->title) }}" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow">
+                                <input type="text" name="title" id="title" value="{{ old('title', $event->title) }}" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow @error('title') border-red-500 @enderror">
+                                @error('title')
+                                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Type -->
                             <div>
                                 <label for="type" class="block text-sm font-bold text-gray-700 mb-1">Type *</label>
-                                <select name="type" id="type" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow">
+                                <select name="type" id="type" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow @error('type') border-red-500 @enderror">
                                     <option value="jpo" {{ old('type', $event->type) == 'jpo' ? 'selected' : '' }}>Journée Portes Ouvertes (JPO)</option>
                                     <option value="salon" {{ old('type', $event->type) == 'salon' ? 'selected' : '' }}>Salon Étudiant</option>
                                 </select>
+                                @error('type')
+                                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Date/Heure -->
                             <div>
                                 <label for="date" class="block text-sm font-bold text-gray-700 mb-1">Date et Heure *</label>
-                                <input type="datetime-local" name="date" id="date" value="{{ old('date', $event->date->format('Y-m-d\TH:i')) }}" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow">
+                                <input type="datetime-local" name="date" id="date" value="{{ old('date', $event->date->format('Y-m-d\TH:i')) }}" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow @error('date') border-red-500 @enderror">
+                                @error('date')
+                                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Lieu -->
                             <div class="md:col-span-2">
                                 <label for="location" class="block text-sm font-bold text-gray-700 mb-1">Lieu *</label>
-                                <input type="text" name="location" id="location" value="{{ old('location', $event->location) }}" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow">
+                                <input type="text" name="location" id="location" value="{{ old('location', $event->location) }}" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow @error('location') border-red-500 @enderror">
+                                @error('location')
+                                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Description -->
                             <div class="md:col-span-2">
                                 <label for="description" class="block text-sm font-bold text-gray-700 mb-1">Description générale *</label>
-                                <textarea name="description" id="description" rows="3" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow">{{ old('description', $event->description) }}</textarea>
+                                <textarea name="description" id="description" rows="3" required class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-shadow @error('description') border-red-500 @enderror">{{ old('description', $event->description) }}</textarea>
+                                @error('description')
+                                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Détails Optionnels -> Section -->

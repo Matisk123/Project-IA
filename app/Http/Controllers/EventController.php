@@ -32,7 +32,7 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'type' => 'required|in:jpo,salon',
-            'date' => 'required|date',
+            'date' => 'required|date|after_or_equal:today',
             'location' => 'required|string|max:255',
             'subjects' => 'nullable|string',
             'requirements' => 'nullable|string',
@@ -67,7 +67,7 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'type' => 'required|in:jpo,salon',
-            'date' => 'required|date',
+            'date' => 'required|date', // On ne met pas after_or_equal:today à l'update sinon on ne peut plus modifier l'historique
             'location' => 'required|string|max:255',
             'subjects' => 'nullable|string',
             'requirements' => 'nullable|string',
@@ -83,6 +83,11 @@ class EventController extends Controller
     {
         if (Auth::user()->role !== 'manager') {
             abort(403);
+        }
+
+        // Edge Case 4: Refus de suppression si inscriptions
+        if ($event->users()->exists()) {
+            return redirect()->back()->with('error', 'Cet événement a déjà des participants inscrits et ne peut être supprimé.');
         }
 
         $event->delete();

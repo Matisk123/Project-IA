@@ -48,8 +48,22 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8">
-            
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-6">
+            @if(session('success'))
+                <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-4 flex items-center gap-3">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="font-medium">{{ session('success') }}</span>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 flex items-center gap-3">
+                    <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="font-medium">{{ session('error') }}</span>
+                </div>
+            @endif
+
+            <div class="flex flex-col md:flex-row gap-8">
             <!-- Main Content -->
             <div class="flex-grow space-y-6">
                 <!-- Description -->
@@ -127,7 +141,13 @@
                     </h4>
                     
                     @if($event->users->isEmpty())
-                        <p class="text-sm text-gray-500 italic">Aucun inscrit pour le moment.</p>
+                        <div class="text-center py-6">
+                            <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            </div>
+                            <p class="text-sm font-medium text-gray-900">Aucun étudiant inscrit</p>
+                            <p class="text-xs text-gray-500 mt-1">Les inscriptions apparaîtront ici.</p>
+                        </div>
                     @else
                         <ul class="space-y-3">
                             @foreach($event->users as $registeredUser)
@@ -143,6 +163,7 @@
                 </div>
             </div>
 
+            </div>
         </div>
     </div>
 </x-app-layout>
