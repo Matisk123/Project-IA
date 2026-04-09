@@ -69,17 +69,17 @@
         }
     </style>
 </head>
-<body class="antialiased bg-slate-950 text-white min-h-screen relative overflow-hidden flex flex-col selection:bg-indigo-500 selection:text-white">
+<body class="antialiased bg-slate-950 text-white min-h-screen relative overflow-x-hidden flex flex-col selection:bg-indigo-500 selection:text-white">
 
     <!-- Ambient Background -->
-    <div class="blob top-[-10%] left-[-5%]"></div>
-    <div class="blob-2"></div>
-    <div class="absolute inset-0 bg-slate-950/50 z-0"></div>
-    <div class="absolute inset-0 bg-pattern z-0 opacity-50"></div>
+    <div class="blob top-[-10%] left-[-5%] pointer-events-none"></div>
+    <div class="blob-2 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-slate-950/50 z-0 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-pattern z-0 opacity-50 pointer-events-none"></div>
 
     <div class="relative z-10 flex flex-col min-h-screen">
         <!-- Navigation -->
-        <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto w-full">
+        <nav class="relative z-50 flex justify-between items-center px-8 py-6 max-w-7xl mx-auto w-full">
             <div class="flex items-center gap-2 group cursor-pointer">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:shadow-indigo-500/50 transition-all duration-300 transform group-hover:scale-105">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,7 +104,7 @@
         </nav>
 
         <!-- Hero Section -->
-        <main class="flex-grow flex flex-col items-center justify-center -mt-16 px-6 relative z-10 text-center">
+        <main class="flex-grow flex flex-col items-center justify-center pt-8 pb-16 px-6 relative z-10 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-sm font-medium mb-8 backdrop-blur-sm animate-fade-in-up">
                 <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
                 Participez au rayonnement de l'école
