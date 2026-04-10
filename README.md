@@ -1,80 +1,86 @@
-# Documentation Centrale du Projet IA - Salons & JPO (US37)
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Bienvenue sur le dépôt central de l'application de gestion des événements (Salons et Journées Portes Ouvertes). Ce document sert de point d'entrée unique (Single Source of Truth) pour qu'un nouveau membre de l'équipe (ou un jury de soutenance) puisse exécuter, comprendre et exploiter le produit sans devoir chercher l'information à travers de multiples commits ou prompts.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
----
+## About Laravel
 
-## 1. Vision et Périmètre (Scope)
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-* **Vision :** Digitaliser et simplifier la publication et l'inscription aux événements d'orientation (Salons et JPO) d'une école.
-* **Périmètre du MVP (Minimum Viable Product) :**
-  * Rôles simplifiés : *Manager* (planification, création) et *Étudiant* (inscription).
-  * Backend robuste (Laravel), Base de données légère (SQLite), Environnement standardisé (Docker).
-  * *(Pour le détail des arbitrages de ce périmètre, se référer à [`docs/US39_justification.md`](docs/US39_justification.md)).*
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
----
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## 2. Architecture & Référentiels (Index)
+## Learning Laravel
 
-Plutôt que d'alourdir ce fichier unique, l'architecture a été découpée et normalisée. Voici les liens directs pour explorer les éléments critiques :
-* **Développement & Standards :** [`CODING_STANDARDS.md`](CODING_STANDARDS.md) (Normes PSR, linting).
-* **Architecture Base de Données :** Dossier `/database/migrations` (Modèle basé sur les tables `users`, `events` et le pivot `event_user`).
-* **Sécurité & SBOM :** [`SECURITY.md`](SECURITY.md) (Règles de sécurité) et [`SBOM.md`](SBOM.md) (Traçabilité des composants).
-* **Tests (QA) :** Dossier `/tests` et configuration `phpunit.xml`. L'application dispose de tests automatisés vérifiant le cœur logique.
-* **Livraison (CI/CD DevOps) :** [`docs/CI_CD.md`](docs/CI_CD.md) et [`docs/DOCKER.md`](docs/DOCKER.md)
-* **Stratégie Git :** [`docs/GIT_STRATEGY.md`](docs/GIT_STRATEGY.md) et [`docs/COMMIT_CONVENTION.md`](docs/COMMIT_CONVENTION.md).
-* **Gouvernance IA :** [`docs/AI_AGENT_RULES.md`](docs/AI_AGENT_RULES.md), [`docs/AI_GUARDRAILS.md`](docs/AI_GUARDRAILS.md), et le fichier point d'entrée `/.antigravity.md`.
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
----
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-## 3. Installation et Exploitation (Guide de Démarrage)
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-### A. Prérequis et Configuration des Variables
-L'application requiert [Docker](https://docs.docker.com/get-docker/) et [Docker Compose](https://docs.docker.com/compose/install/). 
-1. Cloner le projet : `git clone <URL_DU_DEPOT> && cd Project-IA`
-2. Configurer les variables d'environnement. Copier le fichier d'exemple :
-   ```bash
-   cp .env.example .env
-   ```
-   *Astuce :* Assurez-vous que la variable de la base de données est bien calée sur SQLite : `DB_CONNECTION=sqlite`.
+## Laravel Sponsors
 
-### B. Lancement Conteneurisé (Docker)
-C'est la méthode recommandée pour une exploitation locale isolée et fluide.
-1. Compiler et démarrer l'infrastructure web :
-   ```bash
-   docker-compose up -d --build
-   ```
-2. Accéder à l'application via le navigateur : **[http://localhost:8080](http://localhost:8080)**
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### C. Initialisation des Données (US27)
-Pour ne pas arriver sur une page blanche, un script peuple la base avec un environnement type. À l'intérieur de notre conteneur (`projet-ia-app`), lancer les migrations :
+### Premium Partners
+
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
+
+## Contributing
+
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+
+## Code of Conduct
+
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Initialisation des données (US27)
+
+Pour charger le jeu de données de démonstration et de test, utilisez les commandes suivantes :
 
 ```bash
-docker exec -it projet-ia-app php artisan migrate:fresh --seed
+# Pour une installation propre avec données de test
+php artisan migrate:fresh --seed
 ```
-Vous disposez désormais de ce jeu de données :
-* **Comptes Utilisateurs :**
-  * Manager (kohnmatis01@gmail.com) / Mdp: `password`
-  * Étudiant Test (student@example.com) / Mdp: `password`
-* **État des Événements :** 3 événements nominaux à venir avec inscrits, 1 passé, 1 vide et 5 aléatoires.
 
-*(Pour lancer cette commande sans Docker (en pur local), remplacer le préfixe par la simple commande `php artisan migrate:fresh --seed`)*.
-
----
-
-## 4. Exploitation et Maintenance au Quotidien
-
-L'exploitation minimale couvre l'arrêt, le suivi d'erreurs et la connaissance des limites du produit.
-
-### A. Démarrage et Arrêt
-* Pour stopper brutalement et libérer les ports : `docker-compose down`
-* Pour redémarrer de zéro en purgeant les volumes SQLite persistants : `docker-compose down -v`
-
-### B. Suivi des Journaux (Logs)
-L'application crache par défaut (`LOG_CHANNEL=stack`) ses erreurs dans un simple fichier d'exploitation localisé ici :
-`storage/logs/laravel.log`.
-Pour observer les requêtes web du serveur directement, utilisez : `docker-compose logs -f`.
-
-### C. Limites Connues de l'Architecture
-Dans un souci de transparence (et suivant notre gouvernance détaillée dans [`docs/US40_preuves_credibilite.md`](docs/US40_preuves_credibilite.md)), ce périmètre reste étudiant. 
-Certaines requêtes SQL (pivot) gagneront à être cachées Redis si le site devient massif, et l'assise SQLite devrait migrer vers du MySQL/PostgreSQL configuré en variable `DB_CONNECTION` avant un déploiement Cloud à forte charge. L'absence de tests complets d'intrusion externe (Pentest) demeure également.
+### Contenu du jeu de données :
+- **Utilisateurs** :
+    - Manager : `kohnmatis01@gmail.com` (Matis Kohn)
+    - Étudiant Test : `student@example.com`
+    - Mot de passe par défaut : `password`
+- **Événements** :
+    - **Usage Nominal** : 3 événements à venir (Salons et JPO) avec des inscrits.
+    - **Cas d'erreur / Historique** : 1 événement passé terminé.
+    - **État vide** : 1 événement sans aucun participant.
+    - **Données aléatoires** : 5 événements supplémentaires pour peupler l'interface.
