@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-2xl text-white leading-tight">
                 {{ __('Événements (JPO & Salons)') }}
             </h2>
             @if(Auth::user()->role === 'manager')
@@ -46,9 +46,16 @@
                             <div class="h-32 {{ $event->type === 'jpo' ? 'bg-gradient-to-br from-indigo-500/80 to-purple-600/80' : 'bg-gradient-to-br from-emerald-500/80 to-teal-500/80' }} p-6 flex flex-col justify-between text-white relative overflow-hidden backdrop-blur-sm">
                                 <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="flex justify-between items-start relative z-10">
-                                    <span class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-wider">
-                                        {{ $event->type === 'jpo' ? 'Portes Ouvertes' : 'Salon' }}
-                                    </span>
+                                    <div class="flex flex-col gap-2">
+                                        <span class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-wider">
+                                            {{ $event->type === 'jpo' ? 'Portes Ouvertes' : 'Salon' }}
+                                        </span>
+                                        @if($event->date->isPast())
+                                            <span class="px-3 py-1 bg-slate-900/40 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-wider text-slate-300 border border-white/10 text-center">
+                                                Terminé
+                                            </span>
+                                        @endif
+                                    </div>
                                     <div class="text-right">
                                         <div class="text-2xl font-black leading-none">{{ $event->date->format('d') }}</div>
                                         <div class="text-sm font-medium uppercase opacity-80">{{ $event->date->translatedFormat('M y') }}</div>

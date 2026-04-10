@@ -19,6 +19,11 @@ Route::middleware('auth')->group(function () {
     // Events routes
     Route::resource('events', \App\Http\Controllers\EventController::class);
 
+    // Users & Students Management
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+    Route::patch('/users/{user}/role', [\App\Http\Controllers\UserController::class, 'updateRole'])->name('users.update-role');
+    Route::get('/students', [\App\Http\Controllers\UserController::class, 'students'])->name('students.index');
+
     // Registration route with Rate Limiting (Measure 3 of US33)
     Route::post('/events/{event}/toggle-registration', [\App\Http\Controllers\RegistrationController::class, 'toggle'])
         ->middleware('throttle:5,1')

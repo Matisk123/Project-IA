@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-2xl text-white leading-tight">
             {{ __('Modifier l\'événement') }}: <span class="text-indigo-600">{{ $event->title }}</span>
         </h2>
     </x-slot>
@@ -94,7 +94,7 @@
 
                             <!-- Guides -->
                             <div>
-                                <label for="guides" class="block text-sm font-bold text-slate-300 mb-1">Guides des Applications IA</label>
+                                <label for="guides" class="block text-sm font-bold text-slate-300 mb-1">Guides</label>
                                 <textarea name="guides" id="guides" rows="3" class="w-full rounded-xl bg-slate-900 border-slate-700 text-white shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/50 transition-shadow">{{ old('guides', $event->guides) }}</textarea>
                             </div>
                         </div>

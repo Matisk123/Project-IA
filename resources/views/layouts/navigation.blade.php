@@ -22,6 +22,14 @@
                     <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.*')" class="text-slate-300 hover:text-white">
                         Événements
                     </x-nav-link>
+                    @if(Auth::user()->role === 'manager')
+                        <x-nav-link :href="route('students.index')" :active="request()->routeIs('students.index')" class="text-slate-300 hover:text-white">
+                            Étudiants
+                        </x-nav-link>
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" class="text-slate-300 hover:text-white">
+                            Membres
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -80,6 +88,14 @@
             <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.*')" class="text-slate-300">
                 Événements
             </x-responsive-nav-link>
+            @if(Auth::user()->role === 'manager')
+                <x-responsive-nav-link :href="route('students.index')" :active="request()->routeIs('students.index')" class="text-slate-300">
+                    Étudiants
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" class="text-slate-300">
+                    Membres
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

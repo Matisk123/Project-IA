@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-2xl text-white leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -68,7 +68,12 @@
                             <div class="glass-card rounded-xl p-5 hover:-translate-y-2 transition-transform duration-300">
                                 <div class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-2">{{ $event->type === 'jpo' ? 'Portes Ouvertes' : 'Salon' }}</div>
                                 <h4 class="font-bold text-lg text-white mb-1 truncate">{{ $event->title }}</h4>
-                                <div class="text-sm text-slate-400">{{ $event->date->format('d/m/Y') }} • {{ $event->location }}</div>
+                                <div class="text-sm text-slate-400 flex items-center justify-between">
+                                    <span>{{ $event->date->format('d/m/Y') }} • {{ $event->location }}</span>
+                                    @if($event->date->isPast())
+                                        <span class="px-2 py-0.5 bg-slate-500/20 text-slate-400 text-[10px] font-bold rounded-full border border-slate-500/30">TERMINÉ</span>
+                                    @endif
+                                </div>
                                 <a href="{{ route('events.show', $event) }}" class="mt-4 text-sm text-indigo-400 font-bold hover:text-indigo-300 inline-flex items-center gap-1 group">
                                     Voir les détails 
                                     <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>

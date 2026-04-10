@@ -16,12 +16,6 @@ class RegistrationController extends Controller
     {
         $user = Auth::user();
 
-        // Regle metier : Les managers ne peuvent pas figurer dans la liste des participants
-        // car cela fausserait les statistiques de présence étudiant et l'export des contacts.
-        if ($user->role === 'manager') {
-            return redirect()->back()->with('error', 'Action réservée aux élèves. Les managers ne peuvent pas participer.');
-        }
-
         // Regle metier : Une fois l'événement passé, les inscriptions sont verrouillées
         // pour figer le registre de présence historique.
         if ($event->date->isPast()) {

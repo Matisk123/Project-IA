@@ -94,7 +94,7 @@
                         <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                         </div>
-                        <h4 class="font-bold text-white mb-2">Guides (Démos IA)</h4>
+                        <h4 class="font-bold text-white mb-2">Guides</h4>
                         <p class="text-sm text-slate-400 whitespace-pre-line">{{ $event->guides ?: 'À définir' }}</p>
                     </div>
                 </div>
@@ -108,6 +108,12 @@
                     <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
                     
                     <div class="relative z-10 space-y-6">
+                        @if($event->date->isPast())
+                            <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-3 flex items-center gap-3 text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span class="text-sm font-bold uppercase tracking-wider">Cet événement est terminé</span>
+                            </div>
+                        @endif
                         <div>
                             <p class="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-1">Date & Heure</p>
                             <p class="font-bold text-lg flex items-center gap-2">
@@ -133,14 +139,43 @@
                     </div>
                 </div>
 
+                <!-- Participants -->
+                @php
+                    $students = $event->users->where('role', 'student');
+                    $managers = $event->users->where('role', 'manager');
+                @endphp
+
+                <!-- Responsables Section -->
+                <div class="glass-card rounded-3xl p-6">
+                    <h4 class="font-bold text-white mb-4 flex items-center justify-between">
+                        Responsables événements
+                        <span class="bg-purple-500/20 text-purple-400 text-xs font-extrabold px-2 py-1 rounded-full">{{ $managers->count() }}</span>
+                    </h4>
+                    
+                    @if($managers->isEmpty())
+                        <p class="text-sm text-slate-500 italic text-center py-4">Aucun responsable inscrit</p>
+                    @else
+                        <ul class="space-y-3">
+                            @foreach($managers as $manager)
+                                <li class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-400 flex items-center justify-center font-bold text-xs uppercase">
+                                        {{ substr($manager->name, 0, 2) }}
+                                    </div>
+                                    <span class="text-sm font-medium text-slate-300">{{ $manager->name }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+
                 <!-- Students Registered -->
                 <div class="glass-card rounded-3xl p-6">
                     <h4 class="font-bold text-white mb-4 flex items-center justify-between">
                         Élèves inscrits
-                        <span class="bg-indigo-500/20 text-indigo-400 text-xs font-extrabold px-2 py-1 rounded-full">{{ $event->users->count() }}</span>
+                        <span class="bg-indigo-500/20 text-indigo-400 text-xs font-extrabold px-2 py-1 rounded-full">{{ $students->count() }}</span>
                     </h4>
                     
-                    @if($event->users->isEmpty())
+                    @if($students->isEmpty())
                         <div class="text-center py-6">
                             <div class="w-12 h-12 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-3">
                                 <svg class="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -150,12 +185,12 @@
                         </div>
                     @else
                         <ul class="space-y-3">
-                            @foreach($event->users as $registeredUser)
+                            @foreach($students as $student)
                                 <li class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-600 text-indigo-400 flex items-center justify-center font-bold text-xs uppercase">
-                                        {{ substr($registeredUser->name, 0, 2) }}
+                                        {{ substr($student->name, 0, 2) }}
                                     </div>
-                                    <span class="text-sm font-medium text-slate-300">{{ $registeredUser->name }}</span>
+                                    <span class="text-sm font-medium text-slate-300">{{ $student->name }}</span>
                                 </li>
                             @endforeach
                         </ul>
